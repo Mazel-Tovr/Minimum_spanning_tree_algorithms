@@ -11,24 +11,66 @@ namespace Algorithms_Library
     /// </summary>
     public class Edge
     {
-        //Информация о соединяемых вершинах
+
+        /// <summary>
+        /// Информация о соединяемых вершинах
+        /// </summary>
         public int U;
+        /// <summary>
+        /// Информация о соединяемых вершинах
+        /// </summary>
         public int V;
-        //Их вес
+        /// <summary>
+        /// Их вес
+        /// </summary>
         public double Weight;
     }
 
     public class Kruskal
     {
+        /// <summary>
+        /// Константа 100
+        /// </summary>
         private const int MAX = 100;
-        private int _edgesCount;//Количество ребер
-        private int _verticesCount;//Количество вершин
-        private List<Edge> _edges;//Лист со всей инофрамацией о ребрах
-        private int[,] tree;// дерево в двумерном массиве (1-макс кол-во ре)
-        private int[] sets;//Массив количестав вершина 
 
+        /// <summary>
+        /// Количество ребер
+        /// </summary>
+        private int _edgesCount;
+
+        /// <summary>
+        /// Количество вершин
+        /// </summary>
+        private int _verticesCount;
+
+        /// <summary>
+        /// Лист со всей инофрамацией о ребрах
+        /// </summary>
+        private List<Edge> _edges;
+
+        /// <summary>
+        /// дерево в двумерном массиве (1-макс кол-во ре)
+        /// </summary>
+        private int[,] tree;
+
+        /// <summary>
+        /// Массив количестав вершина
+        /// </summary>
+        private int[] sets;
+
+        /// <summary>
+        /// Своистов для получение инфорации о ребрах
+        /// </summary>
         public List<Edge> Edges { get { return _edges; } }
+
+        /// <summary>
+        /// Свойство для получение инфы количество вершин
+        /// </summary>
         public int VerticesCount { get { return _verticesCount; } }
+
+        /// <summary>
+        /// Свойсто для стоимости
+        /// </summary>
         public double Cost { get; private set; }
 
         //Заносим данные о графе из входных данныйх
