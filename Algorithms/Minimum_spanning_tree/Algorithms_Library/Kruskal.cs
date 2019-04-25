@@ -76,7 +76,7 @@ namespace Algorithms_Library
         //Заносим данные о графе из входных данныйх
         public Kruskal(string input)
         {
-            tree = new int[MAX, 3];//?? 3 или 4 пока не ясно 
+            tree = new int[MAX, 3];//Инфа о вершинах от куда -> куда 
             sets = new int[MAX];
 
             string[] lines = input.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);//разбиваем входные данные на массив из строк
@@ -163,7 +163,7 @@ namespace Algorithms_Library
             this.Cost = 0;
             for (i = 1; i <= k; i++)
             {
-                for (i = 1; i < k; i++)
+                for (i = 1; i <= k; i++)
                     if (this.Find(_edges[i].U) != this.Find(_edges[i].V))
                     {
                         tree[t, 1] = _edges[i].U;

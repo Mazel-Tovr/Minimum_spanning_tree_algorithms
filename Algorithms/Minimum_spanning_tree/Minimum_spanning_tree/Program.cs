@@ -14,21 +14,21 @@ namespace Minimum_spanning_tree
             первое - количество вершин
             второе - количество ребер
             остальные строки - это номера вершин ребра и его вес
-            /
+            */
             Kruskal k = new Kruskal(@"4 
                                       6
                                       1 2 1
-                                      2 3 3
+                                      2 3 6
                                       3 4 2
                                       4 1 5
                                       1 3 4
-                                      2 4 6");
+                                      2 4 3");
            
             k.BuildSpanningTree();
             Console.WriteLine("Cost: " + k.Cost);
             k.DisplayInfo();
             Console.WriteLine("Press any key...");
-            */
+            /*
 
             Prim p = new Prim();
             List<Edge_Prim> MST = new List<Edge_Prim>();
@@ -44,7 +44,7 @@ namespace Minimum_spanning_tree
             {
                 Console.WriteLine( item.v1.ToString()+"-->"+ item.v2.ToString()+"  Вес :"+ item.weight.ToString());
             }
-            
+            */
             Console.ReadKey();
 
 

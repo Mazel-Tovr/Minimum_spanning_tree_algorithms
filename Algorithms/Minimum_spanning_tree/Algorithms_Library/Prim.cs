@@ -8,10 +8,22 @@ namespace Algorithms_Library
 {
    public class Edge_Prim
     {
+        /// <summary>
+        /// Вершины от --> куда 
+        /// </summary>
         public int v1, v2;
 
+        /// <summary>
+        /// Вес
+        /// </summary>
         public int weight;
 
+        /// <summary>
+        /// Коструктор
+        /// </summary>
+        /// <param name="v1">Вершина от</param>
+        /// <param name="v2">Вершина куда</param>
+        /// <param name="weight">Вес,стоимость</param>
         public Edge_Prim(int v1, int v2, int weight)
         {
             this.v1 = v1;
@@ -19,6 +31,10 @@ namespace Algorithms_Library
             this.weight = weight;
         }
     }
+
+    /// <summary>
+    /// Алгоритм прима
+    /// </summary>
    public class Prim
     {
         
@@ -26,8 +42,8 @@ namespace Algorithms_Library
         /// Алгоритм прима
         /// </summary>
         /// <param name="numberV">Количество вершин</param>
-        /// <param name="E"></param>
-        /// <param name="MST"></param>
+        /// <param name="E">Входные данные</param>
+        /// <param name="MST">Лист ответа</param>
         public void algorithmByPrim(int numberV, List<Edge_Prim> E, List<Edge_Prim> MST)
         {
             //неиспользованные ребра
@@ -42,21 +58,25 @@ namespace Algorithms_Library
             Random rand = new Random();
             usedV.Add(rand.Next(0, numberV));
             notUsedV.RemoveAt(usedV[0]);
+
             while (notUsedV.Count > 0)
             {
                 int minE = -1; //номер наименьшего ребра
                                //поиск наименьшего ребра
                 for (int i = 0; i < notUsedE.Count; i++)
                 {
-                   
+                   //Проверяем находится ли текушая вершина в использованых и наобарот  
                     if ((usedV.IndexOf(notUsedE[i].v1) != -1) && (notUsedV.IndexOf(notUsedE[i].v2) != -1) ||
                         (usedV.IndexOf(notUsedE[i].v2) != -1) && (notUsedV.IndexOf(notUsedE[i].v1) != -1))
                     {
+                        //Если не первый обход
                         if (minE != -1)
                         {
+                            //Сравниваем вес текуший вершины с "предыдушей"
                             if (notUsedE[i].weight < notUsedE[minE].weight)
                                 minE = i;
                         }
+
                         else
                             minE = i;
                     }
