@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minimum_spanning_tree", "Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms_Library", "Algorithms_Library\Algorithms_Library.csproj", "{76FFD1E4-A73A-4681-B2B2-FEE91A4240BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicInterface", "GraphicInterface\GraphicInterface.csproj", "{BAC084EC-219E-4650-AC5D-E77C3494F79E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{76FFD1E4-A73A-4681-B2B2-FEE91A4240BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76FFD1E4-A73A-4681-B2B2-FEE91A4240BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76FFD1E4-A73A-4681-B2B2-FEE91A4240BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC084EC-219E-4650-AC5D-E77C3494F79E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC084EC-219E-4650-AC5D-E77C3494F79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC084EC-219E-4650-AC5D-E77C3494F79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC084EC-219E-4650-AC5D-E77C3494F79E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
