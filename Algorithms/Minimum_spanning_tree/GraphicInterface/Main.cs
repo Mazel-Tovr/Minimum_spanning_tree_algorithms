@@ -13,6 +13,7 @@ namespace GraphicInterface
 {
     public partial class Main : Form
     {
+        bool FormStatus = true;
         public Main()
         {
             InitializeComponent();
@@ -45,7 +46,7 @@ namespace GraphicInterface
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            AddGraf a = new AddGraf(list);
+            AddGraf a = new AddGraf(list,FormStatus);
             a.Show();
             a.FormClosed += A_FormClosed;
         }
@@ -57,14 +58,27 @@ namespace GraphicInterface
         /// <param name="e"></param>
         private void A_FormClosed(object sender, FormClosedEventArgs e)
         {
-            listBox1.Items.Clear();
-            
-            foreach (var item in list)
+            if (FormStatus == true)
             {
-                
-                listBox1.Items.Add("Ребро: " +item.v1+" ,"+" "+item.v2+" ,"+" "+item.weight);
+                listBox1.Items.Clear();
+
+                foreach (var item in list)
+                {
+
+                    listBox1.Items.Add("Ребро: " + item.v1 + " ," + " " + item.v2 + " ," + " " + item.weight);
+                }
             }
-            
+            else
+            {
+                listBox2.Items.Clear();
+
+                foreach (var item in Edges)
+                {
+
+                    listBox2.Items.Add("Ребро: " + item.U + " ," + " " + item.V + " ," + " " + item.Weight);
+                }
+            }
+
         }
 
         /// <summary>
@@ -85,6 +99,39 @@ namespace GraphicInterface
             }
             listBox1.Items.Add("Обший мин вес :" + weight);
             list.Clear();
+        }
+
+
+        private List<Edge> Edges = new List<Edge>();
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FormStatus = false;
+            AddGraf a = new AddGraf(Edges, FormStatus);
+            a.Show();
+            a.FormClosed += A_FormClosed;
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Clear();
+            Edges.Clear();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Clear();
+            Kruskal k = new Kruskal(Edges, Convert.ToInt32(textBox1.Text), Edges.Count);
+            k.BuildSpanningTree();
+            int weight = 0;
+            for (int i = 0; i < Convert.ToInt32(textBox1.Text); i++)
+            {
+                listBox2.Items.Add(k.tree[i, 1] + " - " + k.tree[i, 2]);
+                weight++;
+            }
+            listBox2.Items.Add("Обший мин вес :" + weight);
+            Edges.Clear();
         }
     }
 }

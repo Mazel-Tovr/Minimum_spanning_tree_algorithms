@@ -11,7 +11,6 @@ namespace Algorithms_Library
     /// </summary>
     public class Edge
     {
-
         /// <summary>
         /// Информация о соединяемых вершинах
         /// </summary>
@@ -24,6 +23,13 @@ namespace Algorithms_Library
         /// Их вес
         /// </summary>
         public double Weight;
+
+        public Edge(int U, int V, double Weight)
+        {
+            this.U = U;
+            this.V = V;
+            this.Weight = Weight;
+        }
     }
 
     public class Kruskal
@@ -51,7 +57,7 @@ namespace Algorithms_Library
         /// <summary>
         /// дерево в двумерном массиве (1-макс кол-во ре)
         /// </summary>
-        private int[,] tree;
+        public int[,] tree;
 
         /// <summary>
         /// Массив количестав вершина
@@ -73,7 +79,11 @@ namespace Algorithms_Library
         /// </summary>
         public double Cost { get; private set; }
 
-        //Заносим данные о графе из входных данныйх
+
+        /// <summary>
+        /// Заносим данные о графе из входных данныйх , версия для консольки
+        /// </summary>
+        /// <param name="input">Строка данных</param>
         public Kruskal(string input)
         {
             tree = new int[MAX, 3];//Инфа о вершинах от куда -> куда 
@@ -90,13 +100,27 @@ namespace Algorithms_Library
             {
                 string[] line = lines[i].Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);//Заносив в новый массив данные о графе из входных данных
 
-                _edges.Add(new Edge
-                {
-                    U = int.Parse(line[0]),
-                    V = int.Parse(line[1]),
-                    Weight = double.Parse(line[2])
-                });//добавляем данные в лист 
+                  _edges.Add(new Edge(Convert.ToInt32(line[0]), Convert.ToInt32(line[1]), Convert.ToDouble(line[2])));
+               //добавляем данные в лист 
             }
+
+            for (int i = 1; i <= _verticesCount; i++) sets[i] = i;
+        }
+
+        /// <summary>
+        /// Версия для Windows Forms бояр
+        /// </summary>
+        /// <param name="List"></param>
+        /// <param name="vershinbl"></param>
+        /// <param name="rebra"></param>
+        public Kruskal(List<Edge> List,int vershinbl ,int rebra)
+        {
+            tree = new int[MAX, 3];//Инфа о вершинах от куда -> куда 
+            sets = new int[MAX];
+            _verticesCount = vershinbl;
+            _edgesCount = rebra;
+            _edges = List;
+            _edges.Insert(0, null);
 
             for (int i = 1; i <= _verticesCount; i++) sets[i] = i;
         }
