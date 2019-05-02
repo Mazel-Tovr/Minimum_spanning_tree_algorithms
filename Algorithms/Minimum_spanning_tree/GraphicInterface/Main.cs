@@ -104,6 +104,11 @@ namespace GraphicInterface
 
         private List<Edge> Edges = new List<Edge>();
 
+        /// <summary>
+        /// Добавляем графф
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             FormStatus = false;
@@ -113,25 +118,40 @@ namespace GraphicInterface
 
         }
 
+        /// <summary>
+        /// Кнопка очистки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
             listBox2.Items.Clear();
             Edges.Clear();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            listBox2.Items.Clear();
-            Kruskal k = new Kruskal(Edges, Convert.ToInt32(textBox1.Text), Edges.Count);
-            k.BuildSpanningTree();
-            int weight = 0;
-            for (int i = 0; i < Convert.ToInt32(textBox1.Text); i++)
-            {
-                listBox2.Items.Add(k.tree[i, 1] + " - " + k.tree[i, 2]);
-                weight++;
+            if (int.TryParse(textBox1.Text, out int vershinbl))
+                {
+                listBox2.Items.Clear();
+                Kruskal k = new Kruskal(Edges, vershinbl, Edges.Count);
+                k.BuildSpanningTree();
+                int weight = 0;
+                for (int i = 1; i < Convert.ToInt32(textBox1.Text); i++)
+                {
+                    listBox2.Items.Add(k.tree[i, 1] + " --> " + k.tree[i, 2]);
+                    weight++;
+                }
+                listBox2.Items.Add("Обший мин вес :" + weight);
+                Edges.Clear();
             }
-            listBox2.Items.Add("Обший мин вес :" + weight);
-            Edges.Clear();
+            else { MessageBox.Show("Введите кол во вершин"); }
+
         }
     }
 }
