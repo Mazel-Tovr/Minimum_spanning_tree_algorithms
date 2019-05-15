@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms_Library", "Algor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicInterface", "GraphicInterface\GraphicInterface.csproj", "{BAC084EC-219E-4650-AC5D-E77C3494F79E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{D02182FA-4794-42D4-B785-20FB245E1048}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BAC084EC-219E-4650-AC5D-E77C3494F79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAC084EC-219E-4650-AC5D-E77C3494F79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAC084EC-219E-4650-AC5D-E77C3494F79E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D02182FA-4794-42D4-B785-20FB245E1048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D02182FA-4794-42D4-B785-20FB245E1048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D02182FA-4794-42D4-B785-20FB245E1048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D02182FA-4794-42D4-B785-20FB245E1048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

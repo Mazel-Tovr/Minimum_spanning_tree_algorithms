@@ -56,7 +56,8 @@ namespace Algorithms_Library
                 notUsedV.Add(i);
             //выбираем случайную начальную вершину
             Random rand = new Random();
-            usedV.Add(rand.Next(0, numberV));
+            // usedV.Add(rand.Next(0, numberV));
+            usedV.Add(1);
             notUsedV.RemoveAt(usedV[0]);
 
             while (notUsedV.Count > 0)
