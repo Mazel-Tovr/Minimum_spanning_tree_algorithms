@@ -14,7 +14,7 @@ namespace Minimum_spanning_tree
             первое - количество вершин
             второе - количество ребер
             остальные строки - это номера вершин ребра и его вес
-            */
+            
           //Kruskal k = new Kruskal(@"4 
           //                          6
           //                          1 2 1
@@ -62,7 +62,18 @@ namespace Minimum_spanning_tree
             }
             
             Console.ReadKey();
+            */
+            List<Edge_Boruvka> list = new List<Edge_Boruvka>();
 
+            list.Add(new Edge_Boruvka(1, 2, 3));
+            list.Add(new Edge_Boruvka(2, 3, 1));
+            list.Add(new Edge_Boruvka(2, 4, 5));
+            list.Add(new Edge_Boruvka(3, 4, 6));
+            list.Add(new Edge_Boruvka(3, 5, 5));
+            list.Add(new Edge_Boruvka(4, 5, 4));
+            list.Add(new Edge_Boruvka(5, 1, 1));
+            Boruvka br = new Boruvka(list, 5, list.Count);
+            br.BuildSpanningTree();
 
         }
 

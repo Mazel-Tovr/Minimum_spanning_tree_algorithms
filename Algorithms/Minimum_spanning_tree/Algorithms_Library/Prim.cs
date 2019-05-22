@@ -67,6 +67,7 @@ namespace Algorithms_Library
                                //поиск наименьшего ребра
                 for (int i = 0; i < notUsedE.Count; i++)
                 {
+                    var a = usedV.IndexOf(notUsedE[i].v1);
                    //Проверяем находится ли текушая вершина в использованых и наобарот  
                     if ((usedV.IndexOf(notUsedE[i].v1) != -1) && (notUsedV.IndexOf(notUsedE[i].v2) != -1) ||
                         (usedV.IndexOf(notUsedE[i].v2) != -1) && (notUsedV.IndexOf(notUsedE[i].v1) != -1))

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Algorithms_Library;
+using System.Diagnostics;
 
 namespace GraphicInterface
 {
@@ -46,7 +47,7 @@ namespace GraphicInterface
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            AddGraf a = new AddGraf(list,FormStatus);
+            AddGraf a = new AddGraf(list, FormStatus);
             a.Show();
             a.FormClosed += A_FormClosed;
         }
@@ -88,17 +89,28 @@ namespace GraphicInterface
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
-            Prim p = new Prim();
-            p.algorithmByPrim(5, list, MST);
-            int weight = 0;
-            foreach (var item in MST)
+            if (int.TryParse(textBox2.Text, out int vershinbl))
             {
-                weight += item.weight;
-                listBox1.Items.Add(item.v1 + "-->" + item.v2 + "  Вес :" + item.weight);
+                listBox1.Items.Clear();
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                Prim p = new Prim();
+                p.algorithmByPrim(vershinbl, list, MST);
+                stopwatch.Stop();
+                int weight = 0;
+                foreach (var item in MST)
+                {
+                    weight += item.weight;
+                    listBox1.Items.Add(item.v1 + "-->" + item.v2 + "  Вес :" + item.weight);
+                }
+                listBox1.Items.Add("Обший мин вес :" + weight);
+                list.Clear();
+               // time1.Text = GetPrimTime(1000,p);
             }
-            listBox1.Items.Add("Обший мин вес :" + weight);
-            list.Clear();
+            else
+            {
+                MessageBox.Show("Введите кол во вершин");
+            }
         }
 
 
@@ -137,21 +149,55 @@ namespace GraphicInterface
         private void button6_Click(object sender, EventArgs e)
         {
             if (int.TryParse(textBox1.Text, out int vershinbl))
-                {
+            {
                 listBox2.Items.Clear();
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
                 Kruskal k = new Kruskal(Edges, vershinbl, Edges.Count);
                 k.BuildSpanningTree();
-                int weight = 0;
+                stopwatch.Stop();
                 for (int i = 1; i < Convert.ToInt32(textBox1.Text); i++)
                 {
                     listBox2.Items.Add(k.tree[i, 1] + " --> " + k.tree[i, 2]);
-                    weight++;
                 }
-                listBox2.Items.Add("Обший мин вес :" + weight);
+                listBox2.Items.Add("Обший мин вес :" + k.Cost);
                 Edges.Clear();
-            }
+               // time2.Text = GetKruskalTime(10000,k);
+            } 
             else { MessageBox.Show("Введите кол во вершин"); }
 
         }
+
+        /* private string GetKruskalTime(int Count, Kruskal k) {
+             Stopwatch stopwatch = new Stopwatch();
+
+             stopwatch.Start();
+
+             for (int i = 0; i < Count; i++)
+             {
+                 k.BuildSpanningTree();
+             }
+
+             stopwatch.Stop();
+
+             return stopwatch.ElapsedMilliseconds.ToString();
+         }
+
+         private string GetPrimTime(int Count, Prim p)
+         {
+             Stopwatch stopwatch = new Stopwatch();
+
+             stopwatch.Start();
+
+             for (int i = 0; i < Count; i++)
+             {
+                 p.algorithmByPrim(Convert.ToInt32(textBox2.Text), list, MST);
+
+             }
+
+             stopwatch.Stop();
+
+             return stopwatch.ElapsedMilliseconds.ToString();
+         }*/
     }
 }

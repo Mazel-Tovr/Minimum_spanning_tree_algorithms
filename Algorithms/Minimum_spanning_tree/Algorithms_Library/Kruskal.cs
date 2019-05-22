@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -60,7 +60,7 @@ namespace Algorithms_Library
         public int[,] tree;
 
         /// <summary>
-        /// Массив количестав вершина
+        /// Массив номеров вершин, для определения зацикливания
         /// </summary>
         private int[] sets;
 
@@ -115,7 +115,7 @@ namespace Algorithms_Library
         /// <param name="rebra"></param>
         public Kruskal(List<Edge> List,int vershinbl ,int rebra)
         {
-            tree = new int[MAX, 3];//Инфа о вершинах от куда -> куда 
+            tree = new int[MAX, 2];//Инфа о вершинах от куда -> куда 
             sets = new int[MAX];
             _verticesCount = vershinbl;
             _edgesCount = rebra;
@@ -177,7 +177,7 @@ namespace Algorithms_Library
         }
 
         /// <summary>
-        /// Построение нового дерева (Где то тут ошибка)
+        /// Построение нового дерева
         /// </summary>
         public void BuildSpanningTree()
         {

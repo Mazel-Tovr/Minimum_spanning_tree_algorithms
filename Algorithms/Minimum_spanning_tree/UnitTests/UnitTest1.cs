@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Algorithms_Library;
 using System.Collections.Generic;
 
+
 namespace UnitTests
 {
     [TestClass]
@@ -11,6 +12,7 @@ namespace UnitTests
         [TestMethod]
         public void TestMethodPrim1()
         {
+            
             Prim p = new Prim();
             List<Edge_Prim> MST = new List<Edge_Prim>();
             List<Edge_Prim> list = new List<Edge_Prim>();
@@ -18,7 +20,7 @@ namespace UnitTests
             list.Add(new Edge_Prim(2, 3, 4));
             list.Add(new Edge_Prim(2, 4, 2));
             list.Add(new Edge_Prim(4, 3, 3));
-            p.algorithmByPrim(5, list, MST);
+            p.algorithmByPrim(4, list, MST);
 
             List<Edge_Prim> MST_Test = new List<Edge_Prim>();
             MST_Test.Add(new Edge_Prim(1, 2, 1));
@@ -44,7 +46,7 @@ namespace UnitTests
             list.Add(new Edge_Prim(2, 3, 2));
             list.Add(new Edge_Prim(2, 4, 4));
             list.Add(new Edge_Prim(3, 4, 3));
-            p.algorithmByPrim(5, list, MST);
+            p.algorithmByPrim(3, list, MST);
 
             List<Edge_Prim> MST_Test = new List<Edge_Prim>();
             MST_Test.Add(new Edge_Prim(1, 2, 1));
