@@ -85,6 +85,7 @@ namespace Algorithms_Library
 
     public class Boruvka
     {
+        
         protected class Subset
         {
             public int parent;
@@ -95,7 +96,8 @@ namespace Algorithms_Library
                 this.parent = parent;
             }
         }
-
+        public  List<Edge_Boruvka> MST = new List<Edge_Boruvka>();
+        public double MSTweight { get; private set;}
         // V-> Number of vertices, E-> Number of edges 
         private static int v;
         private static int e;
@@ -145,13 +147,11 @@ namespace Algorithms_Library
 
             for (int i = 0; i < v; i++)
             {
-                subsets.Add(new Subset(0,0));
-                subsets[i].parent = i;
-                subsets[i].rank = 0;
+                subsets.Add(new Subset(i, 0));
                 cheapest[i] = -1;
             }
             int numTrees = v;
-            double MSTweight = 0;
+            MSTweight = 0;
 
             while (numTrees > 1)
             {
@@ -198,7 +198,8 @@ namespace Algorithms_Library
                         if (set1 == set2)
                             continue;
                         MSTweight += edge[cheapest[i]].weight;
-                        Console.WriteLine(edge[cheapest[i]].src.ToString() + " --> "+ edge[cheapest[i]].dest.ToString());
+                        MST.Add(new Edge_Boruvka(edge[cheapest[i]].src, edge[cheapest[i]].dest, edge[cheapest[i]].weight));
+                        // Console.WriteLine(edge[cheapest[i]].src.ToString() + " --> "+ edge[cheapest[i]].dest.ToString());
 
                         // Do a union of set1 and set2 and decrease number 
                         // of trees 
@@ -208,7 +209,7 @@ namespace Algorithms_Library
 
 
                 }
-                Console.WriteLine("Weight of MST is " + MSTweight);
+               // Console.WriteLine("Weight of MST is " + MSTweight);
 
             }
         }

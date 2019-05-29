@@ -112,10 +112,10 @@ namespace Algorithms_Library
         /// </summary>
         /// <param name="List"></param>
         /// <param name="vershinbl"></param>
-        /// <param name="rebra"></param>
+        /// <param name="rebra"></param>  
         public Kruskal(List<Edge> List,int vershinbl ,int rebra)
         {
-            tree = new int[MAX, 2];//Инфа о вершинах от куда -> куда 
+            tree = new int[MAX, 3];//Инфа о вершинах от куда -> куда 
             sets = new int[MAX];
             _verticesCount = vershinbl;
             _edgesCount = rebra;
@@ -187,13 +187,14 @@ namespace Algorithms_Library
             this.Cost = 0;
             for (i = 1; i <= k; i++)
             {
-                for (i = 1; i <= k; i++)
+                for (i = 1; i < k; i++)
                     if (this.Find(_edges[i].U) != this.Find(_edges[i].V))
                     {
                         tree[t, 1] = _edges[i].U;
                         tree[t, 2] = _edges[i].V;
                         this.Cost += _edges[i].Weight;
-                        this.Join(_edges[t].U, _edges[t].V);
+                        this.Join(Find(_edges[i].U), Find(_edges[i].V));
+
                         t++;
                     }
             }
@@ -206,7 +207,7 @@ namespace Algorithms_Library
         {
             Console.WriteLine("The Edges of the Minimum Spanning Tree are:");
             for (int i = 1; i < _verticesCount; i++)
-                Console.WriteLine(tree[i, 1] + " - " + tree[i, 2]);
+                Console.WriteLine(tree[i, 1] + " --> " + tree[i, 2]);
         }
     }
 }
