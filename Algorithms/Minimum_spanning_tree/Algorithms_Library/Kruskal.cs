@@ -115,7 +115,7 @@ namespace Algorithms_Library
         /// <param name="rebra"></param>  
         public Kruskal(List<Edge> List,int vershinbl ,int rebra)
         {
-            tree = new int[MAX, 3];//Инфа о вершинах от куда -> куда 
+            tree = new int[MAX, 4];//Инфа о вершинах от куда -> куда 
             sets = new int[MAX];
             _verticesCount = vershinbl;
             _edgesCount = rebra;
@@ -192,6 +192,7 @@ namespace Algorithms_Library
                     {
                         tree[t, 1] = _edges[i].U;
                         tree[t, 2] = _edges[i].V;
+                        tree[t, 3] = (int)_edges[i].Weight;
                         this.Cost += _edges[i].Weight;
                         this.Join(Find(_edges[i].U), Find(_edges[i].V));
 

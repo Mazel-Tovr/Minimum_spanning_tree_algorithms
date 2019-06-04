@@ -141,7 +141,7 @@ namespace GraphicInterface
 
                 for (int i = 1; i < vershinbl; i++)
                 {
-                    listBox2.Items.Add(k.tree[i, 1] + " --> " + k.tree[i, 2]);
+                    listBox2.Items.Add(k.tree[i, 1] + " --> " + k.tree[i, 2] + "  Вес :" + k.tree[i, 3]);
                 }
                 listBox2.Items.Add("Обший мин вес :" + k.Cost);
                 Edges.Clear();
@@ -300,6 +300,12 @@ namespace GraphicInterface
             labelTimeBoruvka3.Text = time.GetBoruvkaTime(40000);
             labelTimeBoruvka4.Text = time.GetBoruvkaTime(80000);
             labelTimeBoruvka5.Text = time.GetBoruvkaTime(160000);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DrawGraphForm a = new DrawGraphForm();
+                a.Show();
         }
     }
 }
