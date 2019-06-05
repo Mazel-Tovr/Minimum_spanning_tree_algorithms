@@ -35,24 +35,13 @@ namespace GraphicInterface
             sheet.Image = G.GetBitmap();
         }
 
-        //кнопка - выбрать вершину
-        private void selectButton_Click(object sender, EventArgs e)
-        {
-            selectButton.Enabled = false;
-            drawVertexButton.Enabled = true;
-            drawEdgeButton.Enabled = true;
-            deleteButton.Enabled = true;
-            G.clearSheet();
-            G.drawALLGraph(V, E);
-            sheet.Image = G.GetBitmap();
-            selected1 = -1;
-        }
+        
 
         //кнопка - рисовать вершину
         private void drawVertexButton_Click(object sender, EventArgs e)
         {
             drawVertexButton.Enabled = false;
-            selectButton.Enabled = true;
+            
             drawEdgeButton.Enabled = true;
             deleteButton.Enabled = true;
             G.clearSheet();
@@ -64,7 +53,7 @@ namespace GraphicInterface
         private void drawEdgeButton_Click(object sender, EventArgs e)
         {
             drawEdgeButton.Enabled = false;
-            selectButton.Enabled = true;
+            
             drawVertexButton.Enabled = true;
             deleteButton.Enabled = true;
             G.clearSheet();
@@ -78,7 +67,7 @@ namespace GraphicInterface
         private void deleteButton_Click(object sender, EventArgs e)
         {
             deleteButton.Enabled = false;
-            selectButton.Enabled = true;
+           
             drawVertexButton.Enabled = true;
             drawEdgeButton.Enabled = true;
             G.clearSheet();
@@ -89,7 +78,7 @@ namespace GraphicInterface
         //кнопка - удалить граф
         private void deleteALLButton_Click(object sender, EventArgs e)
         {
-            selectButton.Enabled = true;
+            
             drawVertexButton.Enabled = true;
             drawEdgeButton.Enabled = true;
             deleteButton.Enabled = true;
@@ -107,31 +96,7 @@ namespace GraphicInterface
 
         private void sheet_MouseClick(object sender, MouseEventArgs e)
         {
-            //нажата кнопка "выбрать вершину", ищем степень вершины
-            if (selectButton.Enabled == false)
-            {
-                for (int i = 0; i < V.Count; i++)
-                {
-                    if (Math.Pow((V[i].x - e.X), 2) + Math.Pow((V[i].y - e.Y), 2) <= G.R * G.R)
-                    {
-                        if (selected1 != -1)
-                        {
-                            selected1 = -1;
-                            G.clearSheet();
-                            G.drawALLGraph(V, E);
-                            sheet.Image = G.GetBitmap();
-                        }
-                        if (selected1 == -1)
-                        {
-                            G.drawSelectedVertex(V[i].x, V[i].y);
-                            selected1 = i;
-                            sheet.Image = G.GetBitmap();
-                           
-                            break;
-                        }
-                    }
-                }
-            }
+           
             //нажата кнопка "рисовать вершину"
             if (drawVertexButton.Enabled == false)
             {
@@ -258,6 +223,10 @@ namespace GraphicInterface
             }
         }
 
+        /// <summary>
+        /// Лист ответа прима
+        /// </summary>
+        List<Edge_Prim> MST = new List<Edge_Prim>();
         private void buttonPrim_Click(object sender, EventArgs e)
         {
             List<Edge_Prim> ListPrim = new List<Edge_Prim>();
@@ -265,42 +234,41 @@ namespace GraphicInterface
             {
                 ListPrim.Add(new Edge_Prim(item.v1, item.v2, item.weight));
             }
-            List<Edge_Prim> MST = new List<Edge_Prim>();
+            
             Prim p = new Prim();
             p.algorithmByPrim(V.Count, ListPrim, MST);
 
-            List<Edgee> ListAnswer = new List<Edgee>();
-            foreach (var item in MST)
-            {
-                ListAnswer.Add(new Edgee(item.v1, item.v2, item.weight));
-            }
-            
-            G.drawALLGraphAnswer(V, ListAnswer);
-            sheet.Image = G.GetBitmap();
+           
 
         }
 
+        private List<Edgee> ListAnswerKruskal = new List<Edgee>();
         private void buttonKruskal_Click(object sender, EventArgs e)
         {
             List<Edge> ListKruskal = new List<Edge>();
             foreach (var item in E)
             {
-                ListKruskal.Add(new Edge(item.v1, item.v2, item.weight));
+              
+              ListKruskal.Add(new Edge(item.v1, item.v2, item.weight));
+                
             }
             Kruskal k = new Kruskal(ListKruskal, V.Count, ListKruskal.Count);
             k.BuildSpanningTree();
 
-            List<Edgee> ListAnswer = new List<Edgee>();
+           
             for (int i = 1; i < E.Count; i++)
             {
-                ListAnswer.Add(new Edgee(k.tree[i, 1], k.tree[i, 2], k.tree[i, 3]));
+                if (k.tree[i, 1] != k.tree[i, 2])
+                {
+                    ListAnswerKruskal.Add(new Edgee(k.tree[i, 1], k.tree[i, 2], k.tree[i, 3]));
+                }
             }
 
-            G.drawALLGraphAnswer(V, ListAnswer);
-            sheet.Image = G.GetBitmap();
+            
 
         }
 
+        List<Edgee> ListAnswerBr = new List<Edgee>();
         private void buttonBoruvka_Click(object sender, EventArgs e)
         {
             List<Edge_Boruvka> ListBoruvka = new List<Edge_Boruvka>();
@@ -311,14 +279,13 @@ namespace GraphicInterface
             Boruvka br = new Boruvka(ListBoruvka, V.Count, ListBoruvka.Count);
             br.boruvkaMST();
 
-            List<Edgee> ListAnswer = new List<Edgee>();
+           
             foreach (var item in br.MST)
             {
-                ListAnswer.Add(new Edgee(item.src, item.dest, (int)item.weight));
+                ListAnswerBr.Add(new Edgee(item.src, item.dest, (int)item.weight));
             }
 
-            G.drawALLGraphAnswer(V, ListAnswer);
-            sheet.Image = G.GetBitmap();
+            
 
 
         }
@@ -327,6 +294,72 @@ namespace GraphicInterface
         {
             Main main = new Main();
             main.Show();
+        }
+
+        /// <summary>
+        /// Prim
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            List<Edgee> ListAnswerPrim = new List<Edgee>();
+            if (MST.Count > 0)
+            {
+                ListAnswerPrim.Add(new Edgee(MST[0].v1, MST[0].v2, MST[0].weight));
+                MST.RemoveAt(0);
+            }
+            else
+            {
+                MessageBox.Show("Решение найдено");
+            }
+
+            G.drawALLGraphAnswer(V, ListAnswerPrim);
+            sheet.Image = G.GetBitmap();
+        }
+
+        /// <summary>
+        /// Kruskal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            List<Edgee> ListAnswerKruskal2 = new List<Edgee>();
+            if(ListAnswerKruskal.Count > 0)
+            {
+                ListAnswerKruskal2.Add(new Edgee(ListAnswerKruskal[0].v1, ListAnswerKruskal[0].v2, ListAnswerKruskal[0].weight));
+                ListAnswerKruskal.RemoveAt(0);
+            }
+            else
+            {
+                MessageBox.Show("Решение найдено");
+            }
+
+            G.drawALLGraphAnswer(V, ListAnswerKruskal2);
+            sheet.Image = G.GetBitmap();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button4_Click(object sender, EventArgs e)
+        {
+            List<Edgee> ListAnswerBr2 = new List<Edgee>();
+            if(ListAnswerBr.Count>0)
+            {
+                ListAnswerBr2.Add(new Edgee(ListAnswerBr[0].v1, ListAnswerBr[0].v2, ListAnswerBr[0].weight));
+                ListAnswerBr.RemoveAt(0);
+            }
+            else
+            {
+                MessageBox.Show("Решение найдено");
+            }
+            G.drawALLGraphAnswer(V, ListAnswerBr2);
+            sheet.Image = G.GetBitmap();
         }
     }
 }

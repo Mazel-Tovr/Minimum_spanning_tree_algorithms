@@ -148,11 +148,13 @@ namespace GraphicInterface
                     point = new PointF((V[E[i].v1].x + V[E[i].v2].x) / 2, (V[E[i].v1].y + V[E[i].v2].y) / 2);
                     gr.DrawString(((E[i].weight)).ToString(), fo, br, point);
                 }
+               
             }
             //рисуем вершины
             for (int i = 0; i < V.Count; i++)
             {
                 drawVertex(V[i].x, V[i].y, (i).ToString());
+
             }
         }
 
